@@ -3,6 +3,23 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Class Files #
+*.class
+
+# IDE specific #
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+.project
+.metadata
+.classpath
+.settings/
+.loadpath
+
 # Package Files #
 *.jar
 *.war
