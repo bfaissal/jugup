@@ -1,2 +1,2 @@
 # jugup
-Adopt-a-JSR Demo App
+ Adopt-a-JSR Demo App
