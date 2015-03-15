@@ -20,7 +20,7 @@ nb-configuration.xml
 .settings/
 .loadpath
 rebel.xml
-# target
+target
 
 # Package Files #
 *.jar
