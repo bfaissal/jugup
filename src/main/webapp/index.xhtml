@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -12,10 +14,31 @@
             </ui:define>
 
             <ui:define name="content">
-                content
+                <h:form id="registrationForm">
+                    <p:growl></p:growl>
+                    <p:inputText value="#{registrationManager.name}"></p:inputText>
+                    <p:panelGrid columns="2" columnClasses="labels,inputs" layout="grid" >
+                        <p:outputLabel for="firstName" value="#{msg['registration.firstName.label']}"></p:outputLabel>
+                        <p:inputText value="#{registrationManager.user.firstName}" id="firstName"/>
+                        
+                        <p:outputLabel for="lastName" value="#{msg['registration.lastName.label']}"></p:outputLabel>
+                        <p:inputText value="#{registrationManager.user.lastName}" id="lastName"/>
+                        
+                        <p:outputLabel for="email" value="#{msg['registration.email.label']}"></p:outputLabel>
+                        <p:inputText value="#{registrationManager.user.email}" id="email"/>
+                        
+                        <p:outputLabel for="password" value="#{msg['registration.password.label']}"></p:outputLabel>
+                        <p:inputText value="#{registrationManager.user.password}" id="password"/>
+                        
+                        <p:outputLabel for="passwordConfirmation" value="#{msg['registration.passwordConfirmation.label']}"></p:outputLabel>
+                        <p:inputText value="#{registrationManager.user.passwordConfirmation}" id="passwordConfirmation"/>
+                        <h:panelGroup></h:panelGroup>
+                        <p:commandButton value="#{msg['registration.save.button']}" action="#{registrationManager.save()}" update="registrationForm"></p:commandButton>
+                    </p:panelGrid>
+                    
+                </h:form>
             </ui:define>
 
         </ui:composition>
-
     </body>
 </html>

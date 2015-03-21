@@ -6,20 +6,29 @@
 package org.moroccojug.jugup.registration.entity;
 
 import java.io.Serializable;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import org.moroccojug.jugup.registration.control.RegistrationContstraint;
 
 /**
  *
  * @author faissalboutaounte
  */
-@Entity
+
+@Named
+@RequestScoped
+@Entity(name = "jugup_user")
+@RegistrationContstraint
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -28,29 +37,24 @@ public class User implements Serializable {
     private Long id;
     
     @Column
-    @NotNull(message = "firstName.empty.error")
+    @NotNull(message = "{firstName.empty.error}")
+    @Size(min = 1, message = "{firstName.empty.error}")
     private String firstName;
     @Column
-    @NotNull(message = "Lastname.empty.error")
+    @NotNull(message = "{Lastname.empty.error}")
+    @Size(min = 1,message = "{Lastname.empty.error}")
     private String lastName;
     @Column
-    @Size(min = 8,message = "password.atleast8.error")
+    @Size(min = 8,message = "{password.atleast8.error}")
     private String password;
     
     @Column
-    @javax.validation.constraints.Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*\n" +
-                        "  |  \"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]\n" +
-                        "      |  \\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")\n" +
-                        "@ (?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\n" +
-                        "  |  \\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}\n" +
-                        "       (?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:\n" +
-                        "          (?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]\n" +
-                        "          |  \\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\n" +
-                        "     \\])")
+    @Pattern(regexp = "[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+",
+            message = "{email.notvalid.error}")
     private String email;
     
     @Transient
-    @Size(min = 8,message = "password.atleast8.error")
+    @Size(min = 8,message = "{password.atleast8.error}")
     private String passwordConfirmation;
     
     @Transient
